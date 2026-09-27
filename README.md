@@ -6,8 +6,11 @@ Most agents are eager to help. You ask for a one-line fix and get a refactor. Yo
 
 ## What it enforces
 
+- **Visible authorization citation.** Before any write action the agent must quote the user's sentence that authorizes it — `Authorization: "…"` — in its reply. If it can't, it stops and asks. Internal self-checks get rationalized away; visible ones can't.
+- **Default restate-and-confirm.** For any write or multi-step task the agent restates the plan first (which files, what action, what scope) and waits for an "ok". Only a fully itemized instruction skips this.
+- **Full freeze when stopping.** Stopping to ask means doing *nothing* — not even the "certain part" or harmless-looking writes.
 - **Only what you asked.** Nothing extra, ever.
-- **Zero-guess red lines.** Confidence is not an exemption — "90% sure" is still a guess. Missing paths, names, and numbers may not be filled in from context or chat history. If you can't quote the user's sentence that authorizes an action, don't do it. Previous approvals don't carry over to new tasks.
+- **Zero-guess red lines.** Confidence is not an exemption — "90% sure" is still a guess. Missing paths, names, and numbers may not be filled in from context or chat history. Guessing *goals* counts too: being asked to fix A doesn't license touching B. Previous approvals don't carry over to new tasks.
 - **Vague commands get clarified.** "Continue / do it / go ahead" only counts as authorization when the pending task is unique and item-by-item confirmed; otherwise the agent restates its understanding or offers numbered options first.
 - **Ask first, always.** Target, scope, files, action type, output format, or whether interfaces / config / dependencies / docs / style may change — any uncertainty means stop and ask, *before* acting.
 - **No "let me do the certain part first."** Partial progress on an ambiguous task is still unrequested work.
